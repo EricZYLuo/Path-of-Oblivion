@@ -5,15 +5,18 @@ class stats {
 	int bStats[7];
 	int level;
 	int xp;
+	int skillPoints;
 
 public:
-	stats(int stat[7], int alevel, int axp);
+	stats(int stat[7], int alevel, int axp, int sp);
 	void checkLevel();
 	void statUpdate(int key, int change);
 	void xpUpdate(int change);
+	void spUpdate(int change);
 	int* getStats();
 	int getLevel();
 	int getXp();
+	int getSP();
 
 };
 

@@ -1,11 +1,12 @@
 #include "character.h"
 
-stats::stats(int stat[7], int alevel, int axp) {
+stats::stats(int stat[7], int alevel, int axp, int sp) {
 	for (int i = 0; i < 7; i++) {
 		bStats[i] = stat[i];
 	}
 	level = alevel;
 	xp = axp;
+	skillPoints = sp;
 	return;
 }
 void stats::checkLevel() {
@@ -16,7 +17,11 @@ void stats::checkLevel() {
 	if (xp >= threshold) {
 		xp -= int(threshold);
 		level++;
-		//StatUpdate();
+		for (int i = 0; i < 7; i++) {
+			statUpdate(i,1);
+		}
+		skillPoints++;
+		checkLevel();
 	}
 	return;
 }
