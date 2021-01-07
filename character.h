@@ -1,5 +1,16 @@
 #pragma once
 
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <stdlib.h>
+#include <fstream>
+#include <string>
+#include <thread>
+#include <chrono>
+#include <windows.h>
+#include <WinUser.h>
+
 class stats {
 	//Hp,Mp,atk,def,spA,spD,spe
 	int bStats[7];
@@ -22,7 +33,8 @@ public:
 
 class character
 {
-
-
+	std::string name;
+	stats charStats;
+	//Inventory
 
 };

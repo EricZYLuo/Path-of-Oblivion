@@ -1,3 +1,4 @@
+
 #include "character.h"
 
 stats::stats(int stat[7], int alevel, int axp, int sp) {
@@ -29,4 +30,26 @@ void stats::checkLevel() {
 void stats::statUpdate(int key, int change) {
 	bStats[key] += change;
 	return;
+}
+void stats::xpUpdate(int change) {
+	xp += change;
+}
+
+void stats::spUpdate(int change) {
+	skillPoints += change;
+}
+
+int* stats::getStats() {
+	return bStats;
+}
+int stats::getLevel() {
+	return level;
+}
+
+int stats::getXp() {
+	return xp;
+}
+
+int stats::getSP() {
+	return skillPoints;
 }
