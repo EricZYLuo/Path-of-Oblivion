@@ -24,6 +24,7 @@ class Items
 	int value;
 
 public:
+	Items();
 	Items(std::string title, int val);
 	void changeName(std::string newName);
 	void changeVal(int change);
@@ -31,19 +32,19 @@ public:
 	int getValue();
 };
 
-class weapon:Items {
+class weapon:public Items {
 	int atk;
 public:
-	weapon(std::string title, int val, int atk);
+	weapon(std::string title, int val, int attack);
 	void changeAtk(int change);
 	int getAtk();
 };
 
-class equipment :Items {
+class equipment :public Items {
 	int slot;
 	int modifiers[7];
 public:
-	equipment(std::string title, int val, int slot, int changes[7]);
+	equipment(std::string title, int val, int slotVal, int changes[7]);
 	void changeMods(int change[7]);
 	int getSlot();
 	int* getMods();
