@@ -14,7 +14,7 @@
 
 //Classes
 
-#include "MapFiles.cpp"
+#include "MapFiles.h"
 
 //Standalone Functions
 
