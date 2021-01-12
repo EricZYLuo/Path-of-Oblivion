@@ -9,7 +9,7 @@
 #include <windows.h>
 #include <WinUser.h>
 
-#include "character.cpp"
+#include "character.h"
 
 class posn {
 

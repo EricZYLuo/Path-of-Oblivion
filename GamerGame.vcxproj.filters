@@ -21,18 +21,30 @@
     <ClCompile Include="MapFiles.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Items.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="inventory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="character.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Items.cpp">
+    <ClCompile Include="stats.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Items.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="inventory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="character.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Items.h">
+    <ClInclude Include="stats.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
