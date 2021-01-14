@@ -46,18 +46,24 @@ int posn::getY() {
 tile::tile() {
     display = '#';
     pos = posn();
+    encounterRate = 0;
+    difficulty = 1;
     return;
 }
 
 tile::tile(char disp, posn position) {
     display = disp;
     pos = position;
+    encounterRate = 50;
+    difficulty = pos.getX() * pos.getY();
     return;
 }
 
 tile::tile(char disp, int x, int y) {
     display = disp;
     pos = posn(x, y);
+    encounterRate = 50;
+    difficulty = x * y;
     return;
 }
 
@@ -77,12 +83,30 @@ void tile::changePos(int x, int y) {
     return;
 }
 
+void tile::changeRate(int change) {
+    encounterRate = change;
+    return;
+}
+
+void tile::changeDiff(int change) {
+    difficulty = change;
+    return;
+}
+
 char tile::getDisp() {
     return display;
 }
 
 posn tile::getPos() {
     return pos;
+}
+
+int tile::getRate() {
+    return encounterRate;
+}
+
+int tile::getDiff() {
+    return difficulty;
 }
 
 void tile::tileInteract(character player) {

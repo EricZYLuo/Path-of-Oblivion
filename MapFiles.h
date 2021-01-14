@@ -29,6 +29,8 @@ public:
 class tile {
     char display;
     posn pos;
+    int encounterRate;
+    int difficulty;
 public:
     tile();
     tile(char disp, posn position);
@@ -36,8 +38,12 @@ public:
     void changeDisp(char disp);
     void changePos(posn position);
     void changePos(int x, int y);
+    void changeRate(int change);
+    void changeDiff(int change);
     char getDisp();
     posn getPos();
+    int getRate();
+    int getDiff();
     void tileInteract(character player);
 
 };
@@ -52,5 +58,6 @@ public:
     void mapFill(std::string fileName);
     void mapUpdate();
     void mapDestroy();
+
 
 };
