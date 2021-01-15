@@ -110,7 +110,15 @@ int tile::getDiff() {
 }
 
 void tile::tileInteract(character player) {
+    srand(time(NULL));
+    int randNum = rand() % 100 + 1;
+    if (randNum > encounterRate) {
+        //No encounter occurs
+        return;
+    }
+    else {
 
+    }
 }
 
 
