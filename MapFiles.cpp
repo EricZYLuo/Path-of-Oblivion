@@ -117,7 +117,7 @@ void tile::tileInteract(character player) {
         return;
     }
     else {
-
+        
     }
 }
 

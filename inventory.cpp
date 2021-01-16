@@ -3,35 +3,25 @@
 
 inventory::inventory() {
 	length = 0;
-	invList = NULL;
+	invList.clear();
+	return;
 }
 
-inventory::inventory(int len, Items* list) {
+inventory::inventory(int len, std::vector<Items> list) {
 	length = len;
-	invList = new Items[length];
 	for (int i = 0; i < length; i++) {
-		invList[i] = list[i];
+		invList.emplace_back(list[i]);
 	}
+	return;
 }
 
 void inventory::invAdd(Items item) {
-	Items* temp = new Items[length + 1];
-	for (int i = 0; i < length; i++) {
-		temp[i] = invList[i];
-	}
-	temp[length] = item;
-	delete[] invList;
-	invList = new Items[length + 1];
-	length++;
-	for (int i = 0; i < length; i++) {
-		invList[i] = temp[i];
-	}
-	delete[] temp;
-
+	invList.emplace_back(item);
+	return;
 }
 
 void inventory::invDel(int pos) {
-	Items* temp = new Items[length - 1];
+	std::vector<Items> temp;
 	int counter = 0;
 	for (int i = 0; i < length; i++) {
 		if (i = pos) {
@@ -41,18 +31,14 @@ void inventory::invDel(int pos) {
 			temp[i - counter] = invList[i];
 		}
 	}
-	delete[] invList;
-	length--;
-	invList = new Items[length];
-	for (int i = 0; i < length; i++) {
-		invList[i] = temp[i];
-	}
-	delete[] temp;
-
+	invList.clear();
+	temp.swap(invList);
+	return;
 }
 
 void inventory::fullDel() {
-	delete[] invList;
+	invList.clear();
+	return;
 }
 
 int inventory::findPos(std::string name) {

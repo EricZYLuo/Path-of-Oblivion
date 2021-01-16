@@ -1,13 +1,14 @@
 #pragma once
 #include <cstdlib>
+#include <vector>
 #include "Items.h"
 
 class inventory {
 	int length;
-	Items* invList;
+	std::vector<Items> invList;
 public:
 	inventory();
-	inventory(int len, Items* list);
+	inventory(int len, std::vector<Items> list);
 	void invAdd(Items item);
 	void invDel(int pos);
 	void fullDel();
