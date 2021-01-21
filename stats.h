@@ -8,6 +8,7 @@ class stats
 	int skillPoints;
 
 public:
+	stats();
 	stats(int stat[7]);
 	stats(int stat[7], int alevel, int axp, int sp);
 	void checkLevel();

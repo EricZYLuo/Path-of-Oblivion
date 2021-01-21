@@ -7,7 +7,7 @@
 #include "stats.h"
 #include "inventory.h"
 #include "Items.h"
-#include "MapFiles.h"
+#include "posn.h"
 
 class character
 {
@@ -15,14 +15,15 @@ class character
 	stats charStats;
 	int gold;
 	inventory Inv;
-	posn playerPos;
+	posn pos;
 
 public:
 	character();
 	character(std::string fileName);
 	void battle(character enemy);
 	void changeName(std::string newName);
-	void setStats(stats newStats);
-	void singleStatsChange(int key, int change);
+	void changeGold(int change);
+	std::string getName();
+	int getGold();
 };
 

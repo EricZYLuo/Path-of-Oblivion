@@ -10,21 +10,10 @@
 #include <chrono>
 #include <windows.h>
 #include <WinUser.h>
+#include "posn.h"
 #include "character.h"
 
-class posn {
-    int x;
-    int y;
-public:
-    posn();
-    posn(int a, int b);
-    void setX(int a);
-    void setY(int a);
-    void changeX(int a);
-    void changeY(int a);
-    int getX();
-    int getY();
-};
+
 
 class tile {
     char display;

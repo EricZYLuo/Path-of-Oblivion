@@ -1,5 +1,15 @@
 #include "stats.h"
 
+stats::stats() {
+	for (int i = 0; i < 7; i++) {
+		bStats[i] = 5;
+	}
+	level = 1;
+	xp = 0;
+	skillPoints = 0;
+	return;
+}
+
 stats::stats(int stat[7]) {
 	for (int i = 0; i < 7; i++) {
 		bStats[i] = stat[i];

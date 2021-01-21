@@ -144,6 +144,7 @@
     <ClCompile Include="inventory.cpp" />
     <ClCompile Include="Items.cpp" />
     <ClCompile Include="MapFiles.cpp" />
+    <ClCompile Include="posn.cpp" />
     <ClCompile Include="stats.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +152,7 @@
     <ClInclude Include="inventory.h" />
     <ClInclude Include="Items.h" />
     <ClInclude Include="MapFiles.h" />
+    <ClInclude Include="posn.h" />
     <ClInclude Include="stats.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
