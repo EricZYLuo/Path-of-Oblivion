@@ -13,6 +13,10 @@ character::character() {
 
 character::character(std::string fileName) {
 
+	int axp;
+	int alvl;
+	int aSp;
+	int stat[7];
 	std::ifstream file;
 	file.open(fileName);
 	if (file.fail()) {
@@ -20,6 +24,18 @@ character::character(std::string fileName) {
 		file.close();
 		return;
 	}
+
+	std::cin >> name;
+	for (int i = 0; i < 7; i++) {
+		std::cin >> stat[i];
+	}
+	std::cin >> alvl;
+	std::cin >> axp;
+	std::cin >> aSp;
+	std::cin >> gold;
+
+	
+
 
 
 }
