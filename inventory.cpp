@@ -17,6 +17,7 @@ inventory::inventory(int len, std::vector<Items> list) {
 
 void inventory::invAdd(Items item) {
 	invList.emplace_back(item);
+	length++;
 	return;
 }
 
@@ -33,11 +34,13 @@ void inventory::invDel(int pos) {
 	}
 	invList.clear();
 	temp.swap(invList);
+	length--;
 	return;
 }
 
 void inventory::fullDel() {
 	invList.clear();
+	length = 0;
 	return;
 }
 

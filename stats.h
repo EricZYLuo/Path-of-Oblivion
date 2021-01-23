@@ -11,6 +11,7 @@ public:
 	stats();
 	stats(int stat[7]);
 	stats(int stat[7], int alevel, int axp, int sp);
+	void setStats(int stat[7], int alevel, int axp, int sp);
 	void checkLevel();
 	void statUpdate(int key, int change);
 	void xpUpdate(int change);
