@@ -88,3 +88,21 @@ character::character(std::string fileName) {
 	return;
 
 }
+
+void character::changeName(std::string newName) {
+	name = newName;
+	return;
+}
+
+void character::changeGold(int change) {
+	gold += change;
+	return;
+}
+
+std::string character::getName() {
+	return name;
+}
+
+int character::getGold() {
+	return gold;
+}
