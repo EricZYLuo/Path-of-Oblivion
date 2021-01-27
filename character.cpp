@@ -106,3 +106,21 @@ std::string character::getName() {
 int character::getGold() {
 	return gold;
 }
+
+void character::battle(character enemy) {
+	while (charStats.getStats()[0] > 0 && enemy.charStats.getStats()[0] > 0) {
+		//Display menu
+		std::cout << "______________________" << std::endl;
+		std::cout << "\\0/              >0< " << std::endl;
+		std::cout << charStats.getStats()[0] << "/" << charStats.getStats()[0] << "		" << enemy.charStats.getStats()[0] << "/" << enemy.charStats.getStats()[0] << std::endl;
+		std::cout << "______________________" << std::endl << std::endl;
+
+		std::cout << "|--------------------|" << std::endl;
+		std::cout << "|Choose an Action!   |" << std::endl;
+		std::cout << "|1. Physical Attack  |" << std::endl;
+		std::cout << "|2. Special Attack   |" << std::endl;
+		std::cout << "|3. Defend           |" << std::endl;
+		std::cout << "|4. Use Item         |" << std::endl;
+		std::cout << "|--------------------|" << std::endl;
+	}
+}
