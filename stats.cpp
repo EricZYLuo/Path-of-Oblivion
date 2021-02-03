@@ -2,6 +2,7 @@
 
 stats::stats() {
 	for (int i = 0; i < 7; i++) {
+		trueStats[i] = 5;
 		bStats[i] = 5;
 	}
 	level = 1;
@@ -12,6 +13,7 @@ stats::stats() {
 
 stats::stats(int stat[7]) {
 	for (int i = 0; i < 7; i++) {
+		trueStats[i] = stat[i];
 		bStats[i] = stat[i];
 	}
 	level = 1;
@@ -21,6 +23,7 @@ stats::stats(int stat[7]) {
 }
 stats::stats(int stat[7], int alevel, int axp, int sp) {
 	for (int i = 0; i < 7; i++) {
+		trueStats[i] = stat[i];
 		bStats[i] = stat[i];
 	}
 	level = alevel;
@@ -31,6 +34,7 @@ stats::stats(int stat[7], int alevel, int axp, int sp) {
 
 void stats::setStats(int stat[7], int alevel, int axp, int sp) {
 	for (int i = 0; i < 7; i++) {
+		trueStats[i] = stat[i];
 		bStats[i] = stat[i];
 	}
 	level = alevel;
@@ -56,6 +60,9 @@ void stats::checkLevel() {
 void stats::statUpdate(int key, int change) {
 	bStats[key] += change;
 }
+void stats::trueStatUpdate(int key, int change) {
+	trueStats[key] += change;
+}
 void stats::xpUpdate(int change) {
 	xp += change;
 	return;
@@ -64,13 +71,22 @@ void stats::spUpdate(int change) {
 	skillPoints += change;
 	return;
 }
-int* stats::getStats() {
+int* stats::getTrueStats() {
+	int* temp = new int[7];
+	for (int i = 0; i < 7; i++) {
+		temp[i] = trueStats[i];
+	}
+	return temp;
+}
+
+int* stats::getCurrentStats() {
 	int* temp = new int[7];
 	for (int i = 0; i < 7; i++) {
 		temp[i] = bStats[i];
 	}
 	return temp;
 }
+
 int stats::getLevel() {
 	return level;
 }

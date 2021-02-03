@@ -74,6 +74,7 @@ character::character(std::string fileName) {
 			Inv.invAdd(tempEquipment);
 			break;
 		default:
+			std::cout << "Oops, something went wrong!" << std::endl;
 			//Do nothing
 		}
 			
@@ -112,22 +113,22 @@ void character::battle(character enemy) {
 	int input;
 	int damage;
 	int enemyDamage;
-	while (charStats.getStats()[0] > 0 && enemy.charStats.getStats()[0] > 0) {
+	while (charStats.getCurrentStats()[0] > 0 && enemy.charStats.getCurrentStats()[0] > 0) {
 		//Display menu
 		std::cout << "______________________" << std::endl;
 		std::cout << "\\0/              >0< " << std::endl;
-		std::cout << charStats.getStats()[0] << "/" << charStats.getStats()[0];
+		std::cout << charStats.getTrueStats()[0] << "/" << charStats.getCurrentStats()[0];
 		temp = 2;
-		for (int i = charStats.getStats()[0]; i >= 1; i / 10) {
+		for (int i = charStats.getTrueStats()[0]; i >= 1; i / 10) {
 			temp += 2;
 		}
-		for (int i = enemy.charStats.getStats()[0]; i >= 1; i / 10) {
+		for (int i = enemy.charStats.getCurrentStats()[0]; i >= 1; i / 10) {
 			temp += 2;
 		}
 		for (int i = 0; i < 22 - temp; i++) {
 			std::cout << " ";
 		}
-		std::cout << enemy.charStats.getStats()[0] << "/" << enemy.charStats.getStats()[0] << std::endl;
+		std::cout << enemy.charStats.getTrueStats()[0] << "/" << enemy.charStats.getCurrentStats()[0] << std::endl;
 		std::cout << "______________________" << std::endl << std::endl;
 
 		std::cout << "|--------------------|" << std::endl;
@@ -141,10 +142,11 @@ void character::battle(character enemy) {
 		//Player Action:
 		switch (input) {
 		case 1:
-			damage = charStats.getStats()[2] - (enemy.charStats.getStats()[3] / 2);
+			damage = charStats.getCurrentStats()[2] - (enemy.charStats.getCurrentStats()[3] / 2);
 		case 2:
 			
-			damage = charStats.getStats()[4] - (enemy.charStats.getStats()[5] / 3);
+			damage = (charStats.getCurrentStats()[4] * (charStats.getTrueStats()[1]/20)) - (enemy.charStats.getCurrentStats()[5] / 4);
+			charStats.statUpdate(1, -1 * charStats.getTrueStats()[1] / 20);
 		case 3:
 
 		case 4:
