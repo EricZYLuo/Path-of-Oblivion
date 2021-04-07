@@ -1,6 +1,7 @@
 #pragma once
 class stats
 {
+private:
 	//Hp,Mp,atk,def,spA,spD,spe
 	int bStats[7];
 	int trueStats[7];

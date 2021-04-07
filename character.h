@@ -11,6 +11,7 @@
 
 class character
 {
+private:
 	std::string name;
 	stats charStats;
 	int gold;

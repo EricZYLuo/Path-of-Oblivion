@@ -5,6 +5,7 @@
 
 class Items
 {
+private:
 	std::string name;
 	int value;
 

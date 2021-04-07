@@ -5,7 +5,7 @@ character::character() {
 	name = "";
 	int stat[7] = { 5,5,5,5,5,5,5 };
 	charStats = stats(stat);
-	int gold = 0;
+	gold = 0;
 	Inv = inventory();
 	pos = posn();
 	return;
@@ -114,6 +114,9 @@ void character::battle(character enemy) {
 	int damage;
 	int enemyDamage;
 	while (charStats.getCurrentStats()[0] > 0 && enemy.charStats.getCurrentStats()[0] > 0) {
+		//Reset
+		damage = 0;
+		enemyDamage = 0;
 		//Display menu
 		std::cout << "______________________" << std::endl;
 		std::cout << "\\0/              >0< " << std::endl;
@@ -139,21 +142,65 @@ void character::battle(character enemy) {
 		std::cout << "|4. Use Item         |" << std::endl;
 		std::cout << "|--------------------|" << std::endl;
 		std::cin >> input;
-		//Player Action:
+		//Player Action (WIP):
 		switch (input) {
 		case 1:
 			damage = charStats.getCurrentStats()[2] - (enemy.charStats.getCurrentStats()[3] / 2);
+			break;
 		case 2:
 			
-			damage = (charStats.getCurrentStats()[4] * (charStats.getTrueStats()[1]/20)) - (enemy.charStats.getCurrentStats()[5] / 4);
+			damage = (charStats.getCurrentStats()[4] * (charStats.getTrueStats()[1]/20)) - (enemy.charStats.getCurrentStats()[5] / 2);
 			charStats.statUpdate(1, -1 * charStats.getTrueStats()[1] / 20);
+			break;
 		case 3:
-
+			charStats.statUpdate(4, charStats.getCurrentStats()[4]);
+			break;
 		case 4:
+			std::cout << "WIP! Try something else?" << std::endl;
+			break;
 
 		default:
-			std::cout << "Invalid command try again!" << std::endl;
+			std::cout << "Invalid command, try again!" << std::endl;
 
 		}
+
+		//Enemy Action (WIP):
+		if (enemy.charStats.getCurrentStats()[2] >= enemy.charStats.getCurrentStats()[4]) {
+			enemyDamage = enemy.charStats.getCurrentStats()[2] - (charStats.getCurrentStats()[3] / 2);
+		}
+		else {
+			enemyDamage = enemy.charStats.getCurrentStats()[4] - (charStats.getCurrentStats()[5] / 2);
+		}
+
+		//Action Occurance (Add Speed tie!)
+		//Win or tie in speed
+		if (charStats.getCurrentStats()[6] >= enemy.charStats.getCurrentStats()[6]) {
+			enemy.charStats.statUpdate(0, -1 * damage);
+			if (enemy.charStats.getCurrentStats()[0] > 0) {
+				//End of battle update
+				return;
+			}
+			charStats.statUpdate(0, -1 * enemyDamage);
+			if (charStats.getCurrentStats()[0] > 0) {
+				//Game Over sequence
+				return;
+			}
+		}
+		//Lose in speed
+		else if (charStats.getCurrentStats()[6] < enemy.charStats.getCurrentStats()[6]) {
+
+			charStats.statUpdate(0, -1 * enemyDamage);
+			if (charStats.getCurrentStats()[0] > 0) {
+				//Game Over sequence
+				return;
+			}
+			enemy.charStats.statUpdate(0, -1 * damage);
+			if (enemy.charStats.getCurrentStats()[0] > 0) {
+				//End of battle update
+				return;
+			}
+
+		}
+
 	}
 }
