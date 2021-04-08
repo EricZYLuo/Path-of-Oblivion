@@ -32,43 +32,43 @@ character::character(std::string fileName) {
 		return;
 	}
 
-	std::cin >> name;
+	file >> name;
 	for (int i = 0; i < 7; i++) {
-		std::cin >> stat[i];
+		file >> stat[i];
 	}
-	std::cin >> alvl;
-	std::cin >> axp;
-	std::cin >> aSp;
+	file >> alvl;
+	file >> axp;
+	file >> aSp;
 	charStats.setStats(stat, alvl, axp, aSp);
-	std::cin >> gold;
+	file >> gold;
 	
-	while (std::cin >> check && (check == 'i' || check == 'w' || check == 'e')) {
+	while (file >> check && (check == 'i' || check == 'w' || check == 'e')) {
 		switch (check) {
 		case 'i':
-			std::cin >> tempString;
+			file >> tempString;
 			tempItem.changeName(tempString);
-			std::cin >> tempNum;
+			file >> tempNum;
 			tempItem.changeVal(tempNum);
 			Inv.invAdd(tempItem);
 			break;
 		case 'w':
-			std::cin >> tempString;
+			file >> tempString;
 			tempWeapon.changeName(tempString);
-			std::cin >> tempNum;
+			file >> tempNum;
 			tempWeapon.changeVal(tempNum);
-			std::cin >> tempNum;
+			file >> tempNum;
 			tempWeapon.setAtk(tempNum);
 			Inv.invAdd(tempWeapon);
 			break;
 		case 'e':
-			std::cin >> tempString;
+			file >> tempString;
 			tempEquipment.changeName(tempString);
-			std::cin >> tempNum;
+			file >> tempNum;
 			tempEquipment.changeVal(tempNum);
-			std::cin >> tempNum;
+			file >> tempNum;
 			tempEquipment.setSlot(tempNum);
 			for (int i = 0; i < 7; i++) {
-				std::cin >> stat[i];
+				file >> stat[i];
 			}
 			tempEquipment.setMods(stat);
 			Inv.invAdd(tempEquipment);
@@ -80,9 +80,9 @@ character::character(std::string fileName) {
 			
 	}
 
-	std::cin >> tempNum;
+	file >> tempNum;
 	pos.setX(tempNum);
-	std::cin >> tempNum;
+	file >> tempNum;
 	pos.setY(tempNum);
 
 	file.close();
@@ -203,4 +203,24 @@ void character::battle(character enemy) {
 		}
 
 	}
+}
+
+void character::postBattle(character enemy) {
+	int chance;
+	srand(time(NULL));
+	//Add XP
+	this->charStats.xpUpdate(enemy.charStats.getXp());
+	//Add gold
+	this->changeGold(enemy.getGold());
+	//Add Items (WIP) Placeholder drop rate of 10%
+	for (int i = 0; i < enemy.Inv.getLen(); i++) {
+		chance = rand() % 100 + 1;
+		if (chance <= 10) {
+			Inv.invAdd(enemy.Inv.findItem(i));
+		}
+		else {
+			//Do nothing
+		}
+	}
+	return;
 }

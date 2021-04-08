@@ -17,6 +17,7 @@ private:
 	int gold;
 	inventory Inv;
 	posn pos;
+	void postBattle(character enemy);
 
 public:
 	character();
