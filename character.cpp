@@ -2,12 +2,12 @@
 
 character::character() {
 
-	name = "";
+	this->name = "";
 	int stat[7] = { 5,5,5,5,5,5,5 };
-	charStats = stats(stat);
-	gold = 0;
-	Inv = inventory();
-	pos = posn();
+	this->charStats = stats(stat);
+	this->gold = 0;
+	this->Inv = inventory();
+	this->pos = posn();
 	return;
 }
 
@@ -32,15 +32,15 @@ character::character(std::string fileName) {
 		return;
 	}
 
-	file >> name;
+	file >> this->name;
 	for (int i = 0; i < 7; i++) {
 		file >> stat[i];
 	}
 	file >> alvl;
 	file >> axp;
 	file >> aSp;
-	charStats.setStats(stat, alvl, axp, aSp);
-	file >> gold;
+	this->charStats.setStats(stat, alvl, axp, aSp);
+	file >> this->gold;
 	
 	while (file >> check && (check == 'i' || check == 'w' || check == 'e')) {
 		switch (check) {
@@ -49,7 +49,7 @@ character::character(std::string fileName) {
 			tempItem.changeName(tempString);
 			file >> tempNum;
 			tempItem.changeVal(tempNum);
-			Inv.invAdd(tempItem);
+			this->Inv.invAdd(tempItem);
 			break;
 		case 'w':
 			file >> tempString;
@@ -71,7 +71,7 @@ character::character(std::string fileName) {
 				file >> stat[i];
 			}
 			tempEquipment.setMods(stat);
-			Inv.invAdd(tempEquipment);
+			this->Inv.invAdd(tempEquipment);
 			break;
 		default:
 			std::cout << "Oops, something went wrong!" << std::endl;
@@ -81,9 +81,9 @@ character::character(std::string fileName) {
 	}
 
 	file >> tempNum;
-	pos.setX(tempNum);
+	this->pos.setX(tempNum);
 	file >> tempNum;
-	pos.setY(tempNum);
+	this->pos.setY(tempNum);
 
 	file.close();
 	return;
@@ -91,21 +91,21 @@ character::character(std::string fileName) {
 }
 
 void character::changeName(std::string newName) {
-	name = newName;
+	this->name = newName;
 	return;
 }
 
 void character::changeGold(int change) {
-	gold += change;
+	this->gold += change;
 	return;
 }
 
 std::string character::getName() {
-	return name;
+	return this->name;
 }
 
 int character::getGold() {
-	return gold;
+	return this->gold;
 }
 
 void character::battle(character enemy) {
@@ -113,16 +113,16 @@ void character::battle(character enemy) {
 	int input;
 	int damage;
 	int enemyDamage;
-	while (charStats.getCurrentStats()[0] > 0 && enemy.charStats.getCurrentStats()[0] > 0) {
+	while (this->charStats.getCurrentStats()[0] > 0 && enemy.charStats.getCurrentStats()[0] > 0) {
 		//Reset
 		damage = 0;
 		enemyDamage = 0;
 		//Display menu
 		std::cout << "______________________" << std::endl;
 		std::cout << "\\0/              >0< " << std::endl;
-		std::cout << charStats.getTrueStats()[0] << "/" << charStats.getCurrentStats()[0];
+		std::cout << this->charStats.getTrueStats()[0] << "/" << this->charStats.getCurrentStats()[0];
 		temp = 2;
-		for (int i = charStats.getTrueStats()[0]; i >= 1; i / 10) {
+		for (int i = this->charStats.getTrueStats()[0]; i >= 1; i / 10) {
 			temp += 2;
 		}
 		for (int i = enemy.charStats.getCurrentStats()[0]; i >= 1; i / 10) {
@@ -145,15 +145,15 @@ void character::battle(character enemy) {
 		//Player Action (WIP):
 		switch (input) {
 		case 1:
-			damage = charStats.getCurrentStats()[2] - (enemy.charStats.getCurrentStats()[3] / 2);
+			damage = this->charStats.getCurrentStats()[2] - (enemy.charStats.getCurrentStats()[3] / 2);
 			break;
 		case 2:
 			
-			damage = (charStats.getCurrentStats()[4] * (charStats.getTrueStats()[1]/20)) - (enemy.charStats.getCurrentStats()[5] / 2);
-			charStats.statUpdate(1, -1 * charStats.getTrueStats()[1] / 20);
+			damage = (this->charStats.getCurrentStats()[4] * (this->charStats.getTrueStats()[1]/20)) - (enemy.charStats.getCurrentStats()[5] / 2);
+			this->charStats.statUpdate(1, -1 * this->charStats.getTrueStats()[1] / 20);
 			break;
 		case 3:
-			charStats.statUpdate(4, charStats.getCurrentStats()[4]);
+			this->charStats.statUpdate(4, this->charStats.getCurrentStats()[4]);
 			break;
 		case 4:
 			std::cout << "WIP! Try something else?" << std::endl;
@@ -166,37 +166,38 @@ void character::battle(character enemy) {
 
 		//Enemy Action (WIP):
 		if (enemy.charStats.getCurrentStats()[2] >= enemy.charStats.getCurrentStats()[4]) {
-			enemyDamage = enemy.charStats.getCurrentStats()[2] - (charStats.getCurrentStats()[3] / 2);
+			enemyDamage = enemy.charStats.getCurrentStats()[2] - (this->charStats.getCurrentStats()[3] / 2);
 		}
 		else {
-			enemyDamage = enemy.charStats.getCurrentStats()[4] - (charStats.getCurrentStats()[5] / 2);
+			enemyDamage = enemy.charStats.getCurrentStats()[4] - (this->charStats.getCurrentStats()[5] / 2);
 		}
 
 		//Action Occurance (Add Speed tie!)
 		//Win or tie in speed
-		if (charStats.getCurrentStats()[6] >= enemy.charStats.getCurrentStats()[6]) {
+		if (this->charStats.getCurrentStats()[6] >= enemy.charStats.getCurrentStats()[6]) {
 			enemy.charStats.statUpdate(0, -1 * damage);
 			if (enemy.charStats.getCurrentStats()[0] > 0) {
 				//End of battle update
 				return;
 			}
-			charStats.statUpdate(0, -1 * enemyDamage);
-			if (charStats.getCurrentStats()[0] > 0) {
+			this->charStats.statUpdate(0, -1 * enemyDamage);
+			if (this->charStats.getCurrentStats()[0] > 0) {
 				//Game Over sequence
 				return;
 			}
 		}
 		//Lose in speed
-		else if (charStats.getCurrentStats()[6] < enemy.charStats.getCurrentStats()[6]) {
+		else if (this->charStats.getCurrentStats()[6] < enemy.charStats.getCurrentStats()[6]) {
 
-			charStats.statUpdate(0, -1 * enemyDamage);
-			if (charStats.getCurrentStats()[0] > 0) {
+			this->charStats.statUpdate(0, -1 * enemyDamage);
+			if (this->charStats.getCurrentStats()[0] > 0) {
 				//Game Over sequence
 				return;
 			}
 			enemy.charStats.statUpdate(0, -1 * damage);
 			if (enemy.charStats.getCurrentStats()[0] > 0) {
 				//End of battle update
+				this->postBattle(enemy);
 				return;
 			}
 
@@ -210,17 +211,22 @@ void character::postBattle(character enemy) {
 	srand(time(NULL));
 	//Add XP
 	this->charStats.xpUpdate(enemy.charStats.getXp());
+	this->charStats.checkLevel();
 	//Add gold
 	this->changeGold(enemy.getGold());
 	//Add Items (WIP) Placeholder drop rate of 10%
 	for (int i = 0; i < enemy.Inv.getLen(); i++) {
 		chance = rand() % 100 + 1;
 		if (chance <= 10) {
-			Inv.invAdd(enemy.Inv.findItem(i));
+			this->Inv.invAdd(enemy.Inv.findItem(i));
 		}
 		else {
 			//Do nothing
 		}
 	}
 	return;
+}
+
+character::~character() {
+	//Not much to do, most of the heavy lifting is done by the deconstructors of the other classes that are properties of character
 }

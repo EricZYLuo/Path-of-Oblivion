@@ -15,6 +15,7 @@ public:
 	int findPos(std::string name);
 	Items findItem(int position);
 	int getLen();
+	~inventory();
 	
 };
 

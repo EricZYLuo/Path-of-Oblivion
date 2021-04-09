@@ -2,51 +2,51 @@
 
 
 inventory::inventory() {
-	length = 0;
-	invList.clear();
+	this->length = 0;
+	this->invList.clear();
 	return;
 }
 
 inventory::inventory(int len, std::vector<Items> list) {
-	length = len;
-	for (int i = 0; i < length; i++) {
-		invList.emplace_back(list[i]);
+	this->length = len;
+	for (int i = 0; i < this->length; i++) {
+		this->invList.emplace_back(list[i]);
 	}
 	return;
 }
 
 void inventory::invAdd(Items item) {
-	invList.emplace_back(item);
-	length++;
+	this->invList.emplace_back(item);
+	this->length++;
 	return;
 }
 
 void inventory::invDel(int pos) {
 	std::vector<Items> temp;
 	int counter = 0;
-	for (int i = 0; i < length; i++) {
+	for (int i = 0; i < this->length; i++) {
 		if (i = pos) {
 			counter = 1;
 		}
 		else {
-			temp[i - counter] = invList[i];
+			temp[i - counter] = this->invList[i];
 		}
 	}
-	invList.clear();
+	this->invList.clear();
 	temp.swap(invList);
-	length--;
+	this->length--;
 	return;
 }
 
 void inventory::fullDel() {
-	invList.clear();
-	length = 0;
+	this->invList.clear();
+	this->length = 0;
 	return;
 }
 
 int inventory::findPos(std::string name) {
-	for (int i = 0; i < length; i++) {
-		if (invList[i].getName() == name) {
+	for (int i = 0; i < this->length; i++) {
+		if (this->invList[i].getName() == name) {
 			return i;
 		}
 		else {
@@ -57,9 +57,13 @@ int inventory::findPos(std::string name) {
 }
 
 Items inventory::findItem(int position) {
-	return invList[position];
+	return this->invList[position];
 }
 
 int inventory::getLen() {
-	return length;
+	return this->length;
+}
+
+inventory::~inventory() {
+	this->invList.clear();
 }

@@ -17,6 +17,7 @@ private:
 	int gold;
 	inventory Inv;
 	posn pos;
+	//Private Helper Functions
 	void postBattle(character enemy);
 
 public:
@@ -27,5 +28,6 @@ public:
 	void changeGold(int change);
 	std::string getName();
 	int getGold();
+	~character();
 };
 

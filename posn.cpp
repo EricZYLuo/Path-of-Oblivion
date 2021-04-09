@@ -2,41 +2,45 @@
 
 //Posn Methods
 posn::posn() {
-    x = 0;
-    y = 0;
+    this->x = 0;
+    this->y = 0;
     return;
 }
 
 posn::posn(int a, int b) {
-    x = a;
-    y = b;
+    this->x = a;
+    this->y = b;
     return;
 }
 
 void posn::setX(int a) {
-    x = a;
+    this->x = a;
     return;
 }
 
 void posn::setY(int a) {
-    y = a;
+    this->y = a;
     return;
 }
 
 void posn::changeX(int a) {
-    x += a;
+    this->x += a;
     return;
 }
 
 void posn::changeY(int a) {
-    y += a;
+    this->y += a;
     return;
 }
 
 int posn::getX() {
-    return x;
+    return this->x;
 }
 
 int posn::getY() {
-    return y;
+    return this->y;
+}
+
+posn::~posn() {
+    //Nothing cool
 }

@@ -16,6 +16,7 @@ public:
 	void changeVal(int change);
 	std::string getName();
 	int getValue();
+	virtual ~Items();
 };
 
 class weapon:public Items {
@@ -25,6 +26,7 @@ public:
 	void setAtk(int change);
 	void changeAtk(int change);
 	int getAtk();
+	~weapon();
 };
 
 class equipment :public Items {
@@ -37,4 +39,5 @@ public:
 	void changeMods(int change[7]);
 	int getSlot();
 	int* getMods();
+	~equipment();
  };

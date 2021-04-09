@@ -11,5 +11,6 @@ public:
     void changeY(int a);
     int getX();
     int getY();
+    ~posn();
 };
 

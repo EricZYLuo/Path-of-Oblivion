@@ -1,74 +1,81 @@
 #include "Items.h"
 
 Items::Items() {
-	name = "";
-	value = 0;
+	this->name = "";
+	this->value = 0;
 	return;
 }
 
 Items::Items(std::string title, int val) {
-	name = title;
-	value = val;
+	this->name = title;
+	this->value = val;
 	return;
 }
 
 void Items::changeName(std::string newName) {
-	name = newName;
+	this->name = newName;
 	return;
 }
 
 void Items::changeVal(int change) {
-	value = change;
+	this->value = change;
 	return;
 }
 
 std::string Items::getName() {
-	return name;
+	return this->name;
 }
 
 int Items::getValue() {
-	return value;
+	return this->value;
 }
 
-weapon::weapon(std::string title, int val, int attack) {
-	atk = attack;
-	Items(title, val);
+Items::~Items() {
+	//No special properties to remove
+}
+
+weapon::weapon(std::string title, int val, int attack): Items(title, val) {
+	this->atk = attack;
 	return;
 }
 
 void weapon::setAtk(int change) {
-	atk = change;
+	this->atk = change;
 	return;
 }
 
 void weapon::changeAtk(int change) {
-	atk += change;
+	this->atk += change;
 	return;
 }
 
 int weapon::getAtk() {
-	return atk;
+	return this->atk;
 }
 
-equipment::equipment(std::string title, int val, int slots, int changes[7]) {
+weapon::~weapon() {
+	//Similarily, nothing special to remove
+}
 
-	slot = slots;
+equipment::equipment(std::string title, int val, int slots, int changes[7]):Items(title, val) {
+
+	this->slot = slots;
 	for (int i = 0; i < 7; i++) {
-		modifiers[i] = changes[i];
+		this->modifiers[i] = changes[i];
 	}
-	Items(title, val);
+	
 	return;
 }
 
 void equipment::setSlot(int val) {
-	slot = val;
+	this->slot = val;
 	return;
 }
 
 void equipment::setMods(int change[7]) {
 	for (int i = 0; i < 7; i++)
 	{
-		modifiers[i] = change[i];
+		this->modifiers[i] = change[i];
 	}
 	return;
 }
@@ -76,16 +83,19 @@ void equipment::setMods(int change[7]) {
 void equipment::changeMods(int change[7]) {
 	for (int i = 0; i < 7; i++)
 	{
-		modifiers[i] += change[i];
+		this->modifiers[i] += change[i];
 	}
 	return;
 }
 
 int equipment::getSlot() {
-	return slot;
+	return this->slot;
 }
 
 int* equipment::getMods() {
-	return modifiers;
+	return this->modifiers;
 }
 
+equipment::~equipment() {
+	//Nothing special again to remove
+}

@@ -24,5 +24,6 @@ public:
 	int getLevel();
 	int getXp();
 	int getSP();
+	~stats();
 };
 

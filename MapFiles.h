@@ -34,6 +34,7 @@ public:
     int getRate();
     int getDiff();
     void tileInteract(character player);
+    ~tile();
 
 };
 
@@ -47,6 +48,6 @@ public:
     void mapFill(std::string fileName);
     void mapUpdate();
     void mapDestroy();
-
+    ~map();
 
 };
