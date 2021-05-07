@@ -15,6 +15,7 @@
 //Classes
 
 #include "MapFiles.h"
+#include "character.h"
 
 //Standalone Functions
 
@@ -23,6 +24,9 @@
 
 int main()
 {
+
+    character* player = new character{"characterStats.txt"};
+    /*
     map worldMap(10);
     //worldMap.mapPrint();
     //worldMap.mapFill("map1.txt");
@@ -36,5 +40,10 @@ int main()
         //std::this_thread::sleep_for(std::chrono::seconds(1));
     } while (true);
     worldMap.mapDestroy();
+    */
+    std::string name = player->getName();
+    std::cout << name << std::endl;
+    delete player;
+
 }
 

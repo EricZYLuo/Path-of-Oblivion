@@ -1,0 +1,19 @@
+MemeMaster31415
+20 10 100 10 20 30 10
+1
+0
+0
+10
+w
+TrainerSword 5 2
+e
+ClothHat 5 0 
+5 0 0 0 0 0 0
+e
+ClothVest 5 1
+0 0 0 5 0 2 0
+i
+OldAmulet
+20
+EndItems
+0 0
