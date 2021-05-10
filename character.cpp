@@ -100,12 +100,39 @@ void character::changeGold(int change) {
 	return;
 }
 
+void character::changeStats(stats newStats) {
+	this->charStats = newStats;
+	return;
+}
+
+void character::changeInventory(inventory newInv) {
+	this->Inv = newInv;
+	return;
+}
+
+void character::changePosition(posn newPos) {
+	this->pos = newPos;
+	return;
+}
+
 std::string character::getName() {
 	return this->name;
 }
 
 int character::getGold() {
 	return this->gold;
+}
+
+stats character::getStats() {
+	return this->charStats;
+}
+
+inventory character::getInventory() {
+	return this->Inv;
+}
+
+posn character::getPosition() {
+	return pos;
 }
 
 void character::battle(character enemy) {

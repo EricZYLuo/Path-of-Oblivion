@@ -59,9 +59,12 @@ void stats::checkLevel() {
 }
 void stats::statUpdate(int key, int change) {
 	this->bStats[key] += change;
+	return;
 }
 void stats::trueStatUpdate(int key, int change) {
 	this->trueStats[key] += change;
+	this->bStats[key] += change;
+	return;
 }
 void stats::xpUpdate(int change) {
 	this->xp += change;

@@ -26,8 +26,14 @@ public:
 	void battle(character enemy);
 	void changeName(std::string newName);
 	void changeGold(int change);
+	void changeStats(stats newStats);
+	void changeInventory(inventory newInv);
+	void changePosition(posn newPos);
 	std::string getName();
 	int getGold();
+	stats getStats();
+	inventory getInventory();
+	posn getPosition();
 	~character();
 };
 
