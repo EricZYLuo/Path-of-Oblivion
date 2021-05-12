@@ -9,6 +9,7 @@ class inventory {
 public:
 	inventory();
 	inventory(int len, std::vector<Items> list);
+	void printInventory();
 	void invAdd(Items item);
 	void invDel(int pos);
 	void fullDel();

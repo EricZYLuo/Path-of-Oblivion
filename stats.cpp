@@ -32,6 +32,18 @@ stats::stats(int stat[7], int alevel, int axp, int sp) {
 	return;
 }
 
+void stats::printStats() {
+	std::cout << "Stats: ";
+	for (int i = 0; i < 7; i++) {
+		std::cout << bStats[i] << "/" << trueStats[i] << "\t";
+	}
+	std::cout << std::endl;
+	std::cout << "Level: " << level << std::endl;
+	std::cout << "Xp: " << xp << std::endl;
+	std::cout << "Skill Points: " << skillPoints << std::endl;
+	return;
+}
+
 void stats::setStats(int stat[7], int alevel, int axp, int sp) {
 	for (int i = 0; i < 7; i++) {
 		this->trueStats[i] = stat[i];

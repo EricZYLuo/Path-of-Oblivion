@@ -15,6 +15,14 @@ inventory::inventory(int len, std::vector<Items> list) {
 	return;
 }
 
+void inventory::printInventory() {
+	std::cout << "Inventory:" << std::endl;
+	for (int i = 0; i < this->length; i++) {
+		this->invList.at(i).printItem();
+	}
+	return;
+}
+
 void inventory::invAdd(Items item) {
 	this->invList.emplace_back(item);
 	this->length++;

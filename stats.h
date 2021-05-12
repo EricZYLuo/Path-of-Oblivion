@@ -1,4 +1,11 @@
 #pragma once
+
+#include <iostream>
+#include <cstdlib>
+#include <stdlib.h>
+#include <fstream>
+#include <string>
+
 class stats
 {
 private:
@@ -13,6 +20,7 @@ public:
 	stats();
 	stats(int stat[7]);
 	stats(int stat[7], int alevel, int axp, int sp);
+	void printStats();
 	void setStats(int stat[7], int alevel, int axp, int sp);
 	void checkLevel();
 	void statUpdate(int key, int change);

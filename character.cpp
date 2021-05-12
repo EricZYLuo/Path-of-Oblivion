@@ -90,6 +90,15 @@ character::character(std::string fileName) {
 
 }
 
+void character::printCharacter() {
+	std::cout << this->name << std::endl;
+	this->charStats.printStats();
+	std::cout << "Gold: " << this->gold << std::endl;
+	this->Inv.printInventory();
+	this->pos.printPosn();
+	return;
+}
+
 void character::changeName(std::string newName) {
 	this->name = newName;
 	return;
@@ -140,7 +149,8 @@ void character::battle(character enemy) {
 	int input;
 	int damage;
 	int enemyDamage;
-	while (this->charStats.getCurrentStats()[0] > 0 && enemy.charStats.getCurrentStats()[0] > 0) {
+	stats enemyStatTemp;
+	while (this->charStats.getCurrentStats()[0] > 0 && enemy.getStats().getCurrentStats()[0] > 0) {
 		//Reset
 		damage = 0;
 		enemyDamage = 0;
@@ -149,16 +159,16 @@ void character::battle(character enemy) {
 		std::cout << "\\0/              >0< " << std::endl;
 		std::cout << this->charStats.getTrueStats()[0] << "/" << this->charStats.getCurrentStats()[0];
 		temp = 2;
-		for (int i = this->charStats.getTrueStats()[0]; i >= 1; i / 10) {
+		for (int i = this->charStats.getTrueStats()[0]; i >= 1; i/=10) {
 			temp += 2;
 		}
-		for (int i = enemy.charStats.getCurrentStats()[0]; i >= 1; i / 10) {
+		for (int i = enemy.getStats().getCurrentStats()[0]; i >= 1; i /= 10) {
 			temp += 2;
 		}
 		for (int i = 0; i < 22 - temp; i++) {
 			std::cout << " ";
 		}
-		std::cout << enemy.charStats.getTrueStats()[0] << "/" << enemy.charStats.getCurrentStats()[0] << std::endl;
+		std::cout << enemy.getStats().getTrueStats()[0] << "/" << enemy.getStats().getCurrentStats()[0] << std::endl;
 		std::cout << "______________________" << std::endl << std::endl;
 
 		std::cout << "|--------------------|" << std::endl;
@@ -172,11 +182,11 @@ void character::battle(character enemy) {
 		//Player Action (WIP):
 		switch (input) {
 		case 1:
-			damage = this->charStats.getCurrentStats()[2] - (enemy.charStats.getCurrentStats()[3] / 2);
+			damage = this->charStats.getCurrentStats()[2] - (enemy.getStats().getCurrentStats()[3] / 2);
 			break;
 		case 2:
 			
-			damage = (this->charStats.getCurrentStats()[4] * (this->charStats.getTrueStats()[1]/20)) - (enemy.charStats.getCurrentStats()[5] / 2);
+			damage = (this->charStats.getCurrentStats()[4] * (this->charStats.getTrueStats()[1]/20)) - (enemy.getStats().getCurrentStats()[5] / 2);
 			this->charStats.statUpdate(1, -1 * this->charStats.getTrueStats()[1] / 20);
 			break;
 		case 3:
@@ -192,18 +202,22 @@ void character::battle(character enemy) {
 		}
 
 		//Enemy Action (WIP):
-		if (enemy.charStats.getCurrentStats()[2] >= enemy.charStats.getCurrentStats()[4]) {
-			enemyDamage = enemy.charStats.getCurrentStats()[2] - (this->charStats.getCurrentStats()[3] / 2);
+		if (enemy.getStats().getCurrentStats()[2] >= enemy.getStats().getCurrentStats()[4]) {
+			enemyDamage = enemy.getStats().getCurrentStats()[2] - (this->charStats.getCurrentStats()[3] / 2);
 		}
 		else {
-			enemyDamage = enemy.charStats.getCurrentStats()[4] - (this->charStats.getCurrentStats()[5] / 2);
+			enemyDamage = enemy.getStats().getCurrentStats()[4] - (this->charStats.getCurrentStats()[5] / 2);
 		}
+
+		std::cout << damage << " " << enemyDamage << std::endl;
 
 		//Action Occurance (Add Speed tie!)
 		//Win or tie in speed
-		if (this->charStats.getCurrentStats()[6] >= enemy.charStats.getCurrentStats()[6]) {
-			enemy.charStats.statUpdate(0, -1 * damage);
-			if (enemy.charStats.getCurrentStats()[0] > 0) {
+		if (this->charStats.getCurrentStats()[6] >= enemy.getStats().getCurrentStats()[6]) {
+			enemyStatTemp = enemy.getStats();
+			enemyStatTemp.statUpdate(0, -1 * damage);
+			enemy.changeStats(enemyStatTemp);
+			if (enemy.getStats().getCurrentStats()[0] > 0) {
 				//End of battle update
 				return;
 			}
@@ -214,15 +228,17 @@ void character::battle(character enemy) {
 			}
 		}
 		//Lose in speed
-		else if (this->charStats.getCurrentStats()[6] < enemy.charStats.getCurrentStats()[6]) {
+		else if (this->charStats.getCurrentStats()[6] < enemy.getStats().getCurrentStats()[6]) {
 
 			this->charStats.statUpdate(0, -1 * enemyDamage);
 			if (this->charStats.getCurrentStats()[0] > 0) {
 				//Game Over sequence
 				return;
 			}
-			enemy.charStats.statUpdate(0, -1 * damage);
-			if (enemy.charStats.getCurrentStats()[0] > 0) {
+			enemyStatTemp = enemy.getStats();
+			enemyStatTemp.statUpdate(0, -1 * damage);
+			enemy.changeStats(enemyStatTemp);
+			if (enemy.getStats().getCurrentStats()[0] > 0) {
 				//End of battle update
 				this->postBattle(enemy);
 				return;
@@ -237,15 +253,15 @@ void character::postBattle(character enemy) {
 	int chance;
 	srand(time(NULL));
 	//Add XP
-	this->charStats.xpUpdate(enemy.charStats.getXp());
+	this->charStats.xpUpdate(enemy.getStats().getXp());
 	this->charStats.checkLevel();
 	//Add gold
 	this->changeGold(enemy.getGold());
 	//Add Items (WIP) Placeholder drop rate of 10%
-	for (int i = 0; i < enemy.Inv.getLen(); i++) {
+	for (int i = 0; i < enemy.getInventory().getLen(); i++) {
 		chance = rand() % 100 + 1;
 		if (chance <= 10) {
-			this->Inv.invAdd(enemy.Inv.findItem(i));
+			this->Inv.invAdd(enemy.getInventory().findItem(i));
 		}
 		else {
 			//Do nothing

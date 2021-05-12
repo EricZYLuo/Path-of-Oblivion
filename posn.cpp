@@ -13,6 +13,10 @@ posn::posn(int a, int b) {
     return;
 }
 
+void posn::printPosn() {
+    std::cout << "Position: (" << this->x << "," << this->y << ")" << std::endl;
+}
+
 void posn::setX(int a) {
     this->x = a;
     return;

@@ -12,6 +12,12 @@ Items::Items(std::string title, int val) {
 	return;
 }
 
+void Items::printItem() {
+	std::cout << "Item: " << name << std::endl;
+	std::cout << "Value: " << value << std::endl;
+	return;
+}
+
 void Items::changeName(std::string newName) {
 	this->name = newName;
 	return;
@@ -36,6 +42,13 @@ Items::~Items() {
 
 weapon::weapon(std::string title, int val, int attack): Items(title, val) {
 	this->atk = attack;
+	return;
+}
+
+void weapon::printItem() {
+	std::cout << "Weapon: " << this->getName() << std::endl;
+	std::cout << "Attack Power: " << this->atk << std::endl;
+	std::cout << "Value: " << this->getValue() << std::endl;
 	return;
 }
 
@@ -64,6 +77,39 @@ equipment::equipment(std::string title, int val, int slots, int changes[7]):Item
 		this->modifiers[i] = changes[i];
 	}
 	
+	return;
+}
+
+void equipment::printItem() {
+	std::cout << "Equipment: " << this->getName() << std::endl;
+	std::cout << "Type: ";
+	switch (this->slot) {
+	
+	case 0:
+		std::cout << "Helmet" << std::endl;
+		break;
+	case 1:
+		std::cout << "Chestplate" << std::endl;
+		break;
+	case 2:
+		std::cout << "Leggings" << std::endl;
+		break;
+	case 3:
+		std::cout << "Boots" << std::endl;
+		break;
+	default:
+		std::cout << "Where does this even go?" << std::endl;
+	
+	}
+
+	for (int i = 0; i < 7; i++) {
+		if (this->modifiers[i] != 0) {
+			std::cout << i << ": " << this->modifiers[i] << std::endl;
+		}
+	}
+
+
+	std::cout << "Value: " << this->getValue() << std::endl;
 	return;
 }
 

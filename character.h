@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <fstream>
 #include <string>
+
 #include "stats.h"
 #include "inventory.h"
 #include "Items.h"
@@ -24,6 +25,7 @@ public:
 	character();
 	character(std::string fileName);
 	void battle(character enemy);
+	void printCharacter();
 	void changeName(std::string newName);
 	void changeGold(int change);
 	void changeStats(stats newStats);

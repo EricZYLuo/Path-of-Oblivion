@@ -26,6 +26,8 @@ int main()
 {
 
     character* player = new character{"characterStats.txt"};
+    character* enemy = new character{ };
+    enemy->changeName("Enemy");
     /*
     map worldMap(10);
     //worldMap.mapPrint();
@@ -41,8 +43,10 @@ int main()
     } while (true);
     worldMap.mapDestroy();
     */
+    player->battle(*enemy);
     std::string name = player->getName();
     std::cout << name << std::endl;
+    delete enemy;
     delete player;
 
 }
