@@ -43,9 +43,12 @@ int main()
     } while (true);
     worldMap.mapDestroy();
     */
-    player->battle(*enemy);
-    std::string name = player->getName();
-    std::cout << name << std::endl;
+    //player->battle(*enemy);
+    player->printCharacter();
+    enemy->printCharacter();
+
+    
+    //std::cout << name << std::endl;
     delete enemy;
     delete player;
 

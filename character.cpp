@@ -21,13 +21,10 @@ character::character(std::string fileName) {
 	int temp[7] = { 0 };
 	char check;
 	std::string tempString;
-	Items tempItem;
-	weapon tempWeapon("temp", 0, 0);
-	equipment tempEquipment("temp", 0, 0, temp);
 	std::ifstream file;
 	file.open(fileName);
 	if (file.fail()) {
-		std::cout << "Error opeing a file" << std::endl;
+		std::cout << "Error opening a file" << std::endl;
 		file.close();
 		return;
 	}
@@ -41,41 +38,52 @@ character::character(std::string fileName) {
 	file >> aSp;
 	this->charStats.setStats(stat, alvl, axp, aSp);
 	file >> this->gold;
-	
+
 	while (file >> check && (check == 'i' || check == 'w' || check == 'e')) {
 		switch (check) {
 		case 'i':
+		{
+			std::shared_ptr<Items> tempItem(new Items{});
 			file >> tempString;
-			tempItem.changeName(tempString);
+			tempItem->changeName(tempString);
 			file >> tempNum;
-			tempItem.changeVal(tempNum);
+			tempItem->changeVal(tempNum);
 			this->Inv.invAdd(tempItem);
 			break;
+		}
 		case 'w':
+		{
+			std::shared_ptr<weapon> tempWeapon(new weapon{"temp", 0, 0});
 			file >> tempString;
-			tempWeapon.changeName(tempString);
+			tempWeapon->changeName(tempString);
 			file >> tempNum;
-			tempWeapon.changeVal(tempNum);
+			tempWeapon->changeVal(tempNum);
 			file >> tempNum;
-			tempWeapon.setAtk(tempNum);
+			tempWeapon->setAtk(tempNum);
 			Inv.invAdd(tempWeapon);
 			break;
+		}
 		case 'e':
+		{
+			std::shared_ptr<equipment> tempEquipment(new equipment{ "temp", 0, 0 , temp});
 			file >> tempString;
-			tempEquipment.changeName(tempString);
+			tempEquipment->changeName(tempString);
 			file >> tempNum;
-			tempEquipment.changeVal(tempNum);
+			tempEquipment->changeVal(tempNum);
 			file >> tempNum;
-			tempEquipment.setSlot(tempNum);
+			tempEquipment->setSlot(tempNum);
 			for (int i = 0; i < 7; i++) {
 				file >> stat[i];
 			}
-			tempEquipment.setMods(stat);
+			tempEquipment->setMods(stat);
 			this->Inv.invAdd(tempEquipment);
 			break;
+		}
 		default:
+		{
 			std::cout << "Oops, something went wrong!" << std::endl;
 			//Do nothing
+		}
 		}
 			
 	}
@@ -86,6 +94,7 @@ character::character(std::string fileName) {
 	this->pos.setY(tempNum);
 
 	file.close();
+
 	return;
 
 }
