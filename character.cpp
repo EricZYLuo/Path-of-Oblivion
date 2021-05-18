@@ -218,7 +218,7 @@ void character::battle(character enemy) {
 			enemyDamage = enemy.getStats().getCurrentStats()[4] - (this->charStats.getCurrentStats()[5] / 2);
 		}
 
-		std::cout << damage << " " << enemyDamage << std::endl;
+		
 
 		//Action Occurance (Add Speed tie!)
 		//Win or tie in speed
@@ -226,12 +226,13 @@ void character::battle(character enemy) {
 			enemyStatTemp = enemy.getStats();
 			enemyStatTemp.statUpdate(0, -1 * damage);
 			enemy.changeStats(enemyStatTemp);
-			if (enemy.getStats().getCurrentStats()[0] > 0) {
+			if (enemy.getStats().getCurrentStats()[0] < 0) {
 				//End of battle update
+				this->postBattle(enemy);
 				return;
 			}
 			this->charStats.statUpdate(0, -1 * enemyDamage);
-			if (this->charStats.getCurrentStats()[0] > 0) {
+			if (this->charStats.getCurrentStats()[0] < 0) {
 				//Game Over sequence
 				return;
 			}
@@ -240,14 +241,14 @@ void character::battle(character enemy) {
 		else if (this->charStats.getCurrentStats()[6] < enemy.getStats().getCurrentStats()[6]) {
 
 			this->charStats.statUpdate(0, -1 * enemyDamage);
-			if (this->charStats.getCurrentStats()[0] > 0) {
+			if (this->charStats.getCurrentStats()[0] < 0) {
 				//Game Over sequence
 				return;
 			}
 			enemyStatTemp = enemy.getStats();
 			enemyStatTemp.statUpdate(0, -1 * damage);
 			enemy.changeStats(enemyStatTemp);
-			if (enemy.getStats().getCurrentStats()[0] > 0) {
+			if (enemy.getStats().getCurrentStats()[0] < 0) {
 				//End of battle update
 				this->postBattle(enemy);
 				return;
